@@ -15,7 +15,6 @@ class RegistroActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding : ActivityRegistroBinding
     private  val listahobbies = ArrayList<String>()
-    private val listaregistro = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +22,6 @@ class RegistroActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
         //
         binding.btnRegistrar.setOnClickListener(this)
-        binding.btnListarRegistro.setOnClickListener(this)
         binding.cbDeporte.setOnClickListener(this)
         binding.cbPintura.setOnClickListener(this)
         binding.cbOtro.setOnClickListener(this)
@@ -34,7 +32,6 @@ class RegistroActivity : AppCompatActivity(), View.OnClickListener {
             agregarQuitarhobbies(view)
         }else{
             when(view.id){
-                R.id.btnListarRegistro -> irlistarRegistro()
                 R.id.btnRegistrar -> registroPersona()
             }
         }
@@ -42,15 +39,24 @@ class RegistroActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun registroPersona() {
         if (validarRegistro()){
-            var infopersona = "DNI: " + binding.etDni.text.toString() + "\n " +
-                    "Nombre: " + binding.etNombre.text.toString() + "\n " +
-                    "Apellidos: " + binding.etApellidos.text.toString() + "\n " +
-                    "Email: " + binding.etEmail.text.toString() + "\n " +
-                    "Password: " + binding.etPassword.text.toString() + "\n " +
-                    "Sexo: " + obtenerSexoSeleccionado() + "\n " +
-                    "Hobbies: " +listahobbies.toString()
-            listaregistro.add(infopersona)
+            //
             AppMensaje.enviarMensaje(binding.root,"Persona Registrada Correctamente", TipoMensaje.SUCCESSFULL)
+            //
+            val intentLista = Intent(
+                this, ListadoRegistroActivity::class.java
+            ).apply {
+                putExtra("listaregistro",
+                    "DNI: " + binding.etDni.text.toString() + "\n " +
+                            "Nombre: " + binding.etNombre.text.toString() + "\n " +
+                            "Apellidos: " + binding.etApellidos.text.toString() + "\n " +
+                            "Email: " + binding.etEmail.text.toString() + "\n " +
+                            "Password: " + binding.etPassword.text.toString() + "\n " +
+                            "Sexo: " + obtenerSexoSeleccionado() + "\n " +
+                            "Hobbies: " +  (if (listahobbies.size == 0) binding.edtHobby.text.toString()
+                    else listahobbies.toString() + " " + binding.edtHobby.text.toString()))
+            }
+            startActivity(intentLista)
+            //
             setearControles()
         }
     }
@@ -66,18 +72,10 @@ class RegistroActivity : AppCompatActivity(), View.OnClickListener {
         binding.cbDeporte.isChecked = false
         binding.cbPintura.isChecked = false
         binding.cbOtro.isChecked = false
+        binding.edtHobby.setText("")
         binding.etDni.isFocusableInTouchMode = true
         binding.etDni.requestFocus()
 
-    }
-
-    private fun irlistarRegistro(){
-        val intentLista = Intent(
-            this, ListadoRegistroActivity::class.java
-        ).apply {
-            putExtra("listaregistro", listaregistro)
-        }
-        startActivity(intentLista)
     }
 
     fun validarRegistro() : Boolean{
@@ -99,9 +97,9 @@ class RegistroActivity : AppCompatActivity(), View.OnClickListener {
         }else if (!validarsexo()){
             AppMensaje.enviarMensaje(binding.root,
             "Seleccione su Sexo", TipoMensaje.ERROR)
-        }else if (!validarPreferencias()){
+        }else if (!validarHobbie()){
             AppMensaje.enviarMensaje(binding.root,
-            "Seleccion su Hobbie", TipoMensaje.ERROR)
+            "Seleccion su Hobbie o escriba su Hobbie", TipoMensaje.ERROR)
         }else{
             respuesta = true
         }
@@ -189,9 +187,9 @@ class RegistroActivity : AppCompatActivity(), View.OnClickListener {
         return sexo
     }
 
-    fun validarPreferencias() : Boolean{
+    fun validarHobbie() : Boolean{
         var respuesta = false
-        if (binding.cbDeporte.isChecked || binding.cbPintura.isChecked || binding.cbOtro.isChecked){
+        if (binding.cbDeporte.isChecked || binding.cbPintura.isChecked || binding.cbOtro.isChecked || binding.edtHobby.text.trim().length > 1){
             respuesta = true
         }
         return  respuesta

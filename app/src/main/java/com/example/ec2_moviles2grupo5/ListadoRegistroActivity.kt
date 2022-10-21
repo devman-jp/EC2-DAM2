@@ -15,8 +15,9 @@ class ListadoRegistroActivity : AppCompatActivity() {
         binding = ActivityListadoRegistroBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val  listaregistro = intent.getSerializableExtra("listaregistro") as ArrayList<String>
-        val  adapter = ArrayAdapter(this, R.layout.simple_list_item_1, listaregistro)
-        binding.lvListadoRegistro.adapter = adapter
+        val bundle = intent.extras
+        val datos = bundle?.getString("listaregistro")
+        val enviar = binding.txtDatos
+        enviar.text = datos.toString()
     }
 }

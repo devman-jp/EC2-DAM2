@@ -246,12 +246,6 @@
             android:layout_weight="1"
             android:text="@string/valRegistrar" />
 
-        <Button
-            android:id="@+id/btnListarRegistro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/valListarRegistro" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
