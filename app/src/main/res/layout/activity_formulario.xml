@@ -87,6 +87,7 @@
                 android:textStyle="bold" />
 
             <RadioGroup
+                android:id="@+id/radioGroupFiebre"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
@@ -118,6 +119,7 @@
                 android:textStyle="bold" />
 
             <RadioGroup
+                android:id="@+id/radioGroupIndependencia"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
@@ -148,6 +150,7 @@
                 android:textStyle="bold" />
 
             <RadioGroup
+                android:id="@+id/radioGroupAdulto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
