@@ -14,7 +14,7 @@ class FormularioActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityFormularioBinding
     private val listaSintomas = ArrayList<String>()
-    private  val listaServicios = ArrayList<String>()
+    private val listaServicios = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,18 +89,18 @@ class FormularioActivity : AppCompatActivity(), View.OnClickListener {
 
         var respuesta = false
 
-        if (!validarFiebre()){
+        if (!validarSintomas()){
+            AppMensaje.enviarMensaje(binding.root,
+                "Seleccione al menos un sintoma", TipoMensaje.ERROR)
+        }else if (!validarFiebre()){
             AppMensaje.enviarMensaje(binding.root,
                 "Indique si tiene fiebre o no", TipoMensaje.ERROR)
-        }else if (!validarAdulto()){
-            AppMensaje.enviarMensaje(binding.root,
-                "Indique si cuenta con un Adulto en casa", TipoMensaje.ERROR)
         }else if (!validarIndependencia()){
             AppMensaje.enviarMensaje(binding.root,
                 "Indique si vive solo en casa", TipoMensaje.ERROR)
-        }else if (!validarSintomas()){
+        }else if (!validarAdulto()){
             AppMensaje.enviarMensaje(binding.root,
-                "Seleccione al menos un sintoma", TipoMensaje.ERROR)
+                "Indique si cuenta con un Adulto en casa", TipoMensaje.ERROR)
         }else{
             respuesta = true
         }
@@ -151,8 +151,8 @@ class FormularioActivity : AppCompatActivity(), View.OnClickListener {
     fun ObtenerIndependencia(): String {
         var flag: String = "";
         when(binding.radioGroupIndependencia.checkedRadioButtonId) {
-            R.id.rbSiIndependencia -> flag = "Vive solo";
-            R.id.rbNoIndependencia -> flag = "No vive solo";
+            R.id.rbSiIndependencia -> flag = "Sí";
+            R.id.rbNoIndependencia -> flag = "No";
         }
         return flag;
     }
@@ -160,23 +160,41 @@ class FormularioActivity : AppCompatActivity(), View.OnClickListener {
     fun ObtenerAdultoMayor(): String {
         var flag: String = "";
         when(binding.radioGroupAdulto.checkedRadioButtonId) {
-            R.id.rbSiAdulto -> flag = "Vive con un Adulto Mayor";
-            R.id.rbNoAdulto -> flag = "No vive con Adulto Mayor";
+            R.id.rbSiAdulto -> flag = "Sí";
+            R.id.rbNoAdulto -> flag = "No";
         }
         return flag;
     }
 
     private fun agregarQuitarSintomas(checkbox : CheckBox){
-        if (checkbox.isChecked)
-            listaSintomas.add(checkbox.text.toString())
+        var OpcionesSintomas = ArrayList<String>()
+        OpcionesSintomas.add("cbGustoOlfato")
+        OpcionesSintomas.add("cbTos")
+        OpcionesSintomas.add("cbGarganta")
+        OpcionesSintomas.add("cbCongestion")
+        OpcionesSintomas.add("cbFiebre")
+        OpcionesSintomas.add("cbNinguno")
+        if (OpcionesSintomas.contains(checkbox.id.toString()))
+            print(checkbox.id.toString())
+            if(checkbox.isChecked) {
+                listaSintomas.add(checkbox.text.toString())
+            }
         else{
             listaSintomas.remove(checkbox.text.toString())
         }
     }
 
     private fun agregarQuitarServicios(checkbox : CheckBox){
-        if (checkbox.isChecked)
-            listaServicios.add(checkbox.text.toString())
+        var OpcionesServicios = ArrayList<String>()
+        OpcionesServicios.add("cbLuz")
+        OpcionesServicios.add("cbAgua")
+        OpcionesServicios.add("cbInternet")
+        OpcionesServicios.add("cbCable")
+        if (OpcionesServicios.contains(checkbox.id.toString()))
+            print(checkbox.id.toString())
+            if(checkbox.isChecked){
+                listaServicios.add(checkbox.text.toString())
+            }
         else{
             listaServicios.remove(checkbox.text.toString())
         }
