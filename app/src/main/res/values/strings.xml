@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">EC2_Moviles2Grupo5</string>
+    <string name="valRegistro">REGISTRO</string>
+    <string name="valFormulario">FORMULARIO</string>
+    <string name="valListado">LISTADO</string>
+    <string name="valListarRegistro">LISTAR</string>
+    <string name="valRegistrar">REGISTRAR</string>
+</resources>
