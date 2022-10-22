@@ -6,57 +6,55 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Aplicacion de Clinica"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/btnRegistro"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="212dp"
-        android:text="@string/valRegistro"
+        android:layout_width="196dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="352dp"
+        android:backgroundTint="#2196F3"
+        android:text="Registro"
+        app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnFormulario"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/valFormulario"
+        android:layout_width="195dp"
+        android:layout_height="64dp"
+        android:backgroundTint="#2196F3"
+        android:text="Formulario"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegistro" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRegistro"
+        app:layout_constraintVertical_bias="0.189" />
 
     <Button
-        android:id="@+id/btnListado"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/valListado"
+        android:id="@+id/btnListarMedicina"
+        android:layout_width="192dp"
+        android:layout_height="58dp"
+        android:backgroundTint="#2196F3"
+        android:text="Listado"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnFormulario" />
+        app:layout_constraintTop_toBottomOf="@+id/btnFormulario"
+        app:layout_constraintVertical_bias="0.226" />
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="97dp"
-        android:layout_height="91dp"
-        android:layout_marginTop="32dp"
+        android:id="@+id/imageView"
+        android:layout_width="218dp"
+        android:layout_height="224dp"
+        android:layout_marginTop="76dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@android:drawable/ic_menu_myplaces" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/clinic" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
