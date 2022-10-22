@@ -1,5 +1,6 @@
 package com.example.ec2_moviles2grupo5
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,8 +14,8 @@ import com.example.ec2_moviles2grupo5.databinding.ActivityMainBinding
 class FormularioActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityFormularioBinding
-    private val listaSintomas = ArrayList<String>()
-    private val listaServicios = ArrayList<String>()
+    private var listaSintomas = ArrayList<String>()
+    private var listaServicios = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +37,12 @@ class FormularioActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(view: View) {
         if (view is CheckBox){
-            agregarQuitarServicios(view);
-            agregarQuitarSintomas(view);
+            if(view.id == binding.cbNinguno.id || view.id == binding.cbCongestion.id || view.id == binding.cbFiebre.id || view.id == binding.cbGarganta.id || view.id == binding.cbGustoOlfato.id || view.id == binding.cbTos.id) {
+                agregarQuitarSintomas(view)
+            }
+            if (view.id == binding.cbAgua.id || view.id == binding.cbCable.id || view.id == binding.cbInternet.id || view.id == binding.cbLuz.id){
+                agregarQuitarServicios(view);
+            };
         }else{
             when(view.id){
                 R.id.btnResolver -> registroFormulario()
@@ -167,34 +172,16 @@ class FormularioActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun agregarQuitarSintomas(checkbox : CheckBox){
-        var OpcionesSintomas = ArrayList<String>()
-        OpcionesSintomas.add("cbGustoOlfato")
-        OpcionesSintomas.add("cbTos")
-        OpcionesSintomas.add("cbGarganta")
-        OpcionesSintomas.add("cbCongestion")
-        OpcionesSintomas.add("cbFiebre")
-        OpcionesSintomas.add("cbNinguno")
-        if (OpcionesSintomas.contains(checkbox.id.toString()))
-            print(checkbox.id.toString())
-            if(checkbox.isChecked) {
-                listaSintomas.add(checkbox.text.toString())
-            }
+        if (checkbox.isChecked)
+            listaSintomas.add(checkbox.text.toString())
         else{
             listaSintomas.remove(checkbox.text.toString())
         }
     }
 
     private fun agregarQuitarServicios(checkbox : CheckBox){
-        var OpcionesServicios = ArrayList<String>()
-        OpcionesServicios.add("cbLuz")
-        OpcionesServicios.add("cbAgua")
-        OpcionesServicios.add("cbInternet")
-        OpcionesServicios.add("cbCable")
-        if (OpcionesServicios.contains(checkbox.id.toString()))
-            print(checkbox.id.toString())
-            if(checkbox.isChecked){
-                listaServicios.add(checkbox.text.toString())
-            }
+        if (checkbox.isChecked)
+            listaServicios.add(checkbox.text.toString())
         else{
             listaServicios.remove(checkbox.text.toString())
         }
