@@ -16,6 +16,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.btnRegistro.setOnClickListener (this)
+        binding.btnFormulario.setOnClickListener(this)
+        binding.btnListarMedicina.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
